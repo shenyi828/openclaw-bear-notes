@@ -85,6 +85,21 @@ A Bear.app note-writing skill for OpenClaw that turns conversations into structu
 ./scripts/suggest_title.py --file /path/to/body.md
 ```
 
+### 6. 主入口：自动建议标题 / 标签 / 新建或追加
+
+```bash
+./scripts/create_or_append_note.py \
+  --file /path/to/body.md \
+  --print-only
+```
+
+- 默认会：
+  - 粗略建议标题
+  - 粗略推荐标签
+  - 判断是 `create` 还是 `append`
+  - 先渲染正式 Markdown
+- 若不加 `--print-only`，会进一步尝试写入 Bear。
+
 ## Installation
 
 ### For OpenClaw-style local skills
