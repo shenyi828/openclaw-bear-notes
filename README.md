@@ -100,6 +100,26 @@ A Bear.app note-writing skill for OpenClaw that turns conversations into structu
   - 先渲染正式 Markdown
 - 若不加 `--print-only`，会进一步尝试写入 Bear。
 
+## Obsidian sync
+
+A one-way psychology-note sync is now available:
+
+```bash
+./scripts/sync_psychology_to_obsidian.py
+```
+
+Default target:
+
+```text
+/Users/yizhitan/Documents/ObsidianVaults/our-obsidian-notes/博闻强记/心理学/
+```
+
+Current behavior:
+- prefers optimized notes from `vector-test/data/manual/`
+- falls back to Bear-exported psychology notes from `vector-test/data/bear/psychology/`
+- keeps sync one-way into Obsidian
+- writes files as Markdown compatible with Obsidian wikilinks
+
 ## Installation
 
 ### For OpenClaw-style local skills
