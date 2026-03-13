@@ -73,6 +73,18 @@ A Bear.app note-writing skill for OpenClaw that turns conversations into structu
 
 > 说明：该能力当前依赖 Bear 前台界面与 macOS UI 自动化，系统语言、输入法、窗口焦点变化都可能影响稳定性。
 
+### 4. 初步判断该新建还是追加
+
+```bash
+./scripts/decide_note_action.py --text "把这段会议纪要整理成 Bear 笔记"
+```
+
+### 5. 从正文粗略建议标题
+
+```bash
+./scripts/suggest_title.py --file /path/to/body.md
+```
+
 ## Installation
 
 ### For OpenClaw-style local skills
