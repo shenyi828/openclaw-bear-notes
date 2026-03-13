@@ -1,0 +1,14 @@
+{
+  "default_save_dir": "~/Documents/bear-notes-export",
+  "default_domain_tag": "博闻强记/心理学",
+  "secondary_tags": [],
+  "prefer_save_local_first": true,
+  "try_sync_to_bear": true,
+  "allow_wikilinks": false,
+  "template_defaults": {
+    "concept": ["定义", "机制", "表现", "应用", "风险与局限", "总结"],
+    "method": ["目标", "为什么", "步骤", "注意事项", "总结"],
+    "meeting": ["背景", "关键信息", "结论", "待办"],
+    "review": ["发生了什么", "问题", "原因", "修正", "结论"]
+  }
+}
