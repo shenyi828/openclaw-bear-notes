@@ -73,7 +73,58 @@ A Bear.app note-writing skill for OpenClaw that turns conversations into structu
 
 > 说明：该能力当前依赖 Bear 前台界面与 macOS UI 自动化，系统语言、输入法、窗口焦点变化都可能影响稳定性。
 
-## 开源发布建议
+## Installation
+
+### For OpenClaw-style local skills
+
+Clone or copy this repository into a local skills directory that your agent runtime can read.
+
+Typical example:
+
+```bash
+git clone https://github.com/shenyi828/openclaw-bear-notes.git
+```
+
+Then place `bear-notes/` where your local agent runtime expects custom skills, or merge the folder into an existing `skills/` directory.
+
+### For local development only
+
+If you already have a local skill workspace, you do **not** need to download it again from GitHub just to keep using it. The GitHub repo is mainly the public source-of-truth for sharing and versioning.
+
+## Requirements
+
+This project currently assumes:
+
+- macOS
+- Bear.app installed
+- `osascript` available
+- an agent/runtime that can read `SKILL.md` and run local scripts
+
+Experimental append support additionally depends on Bear front-end UI automation, so behavior may vary with:
+
+- system language
+- input method
+- window focus
+- UI layout changes
+
+## Positioning vs official Bear skills
+
+This repository is **not** trying to replace an official Bear integration.
+
+Its focus is different:
+
+- turn conversations into structured long-term notes
+- keep a local Markdown backup
+- enforce sane tag rules
+- encourage controlled linking and note hygiene
+- support a repeatable personal knowledge workflow
+
+So a better mental model is:
+
+> official Bear skills may expose Bear capabilities,
+> while `bear-notes` tries to package a long-term Bear writing workflow.
+
+## Open-source publishing notes
 
 建议把个人路径、私有标签树、自动化细节做成配置项，不要硬编码在公共版里。
 
@@ -89,6 +140,6 @@ A Bear.app note-writing skill for OpenClaw that turns conversations into structu
 - 向量库路径
 - 个人目录命名
 
-## 许可证
+## License
 
-可按你自己的选择添加，例如 MIT。
+MIT.
