@@ -94,7 +94,7 @@ A Bear.app note-writing skill for OpenClaw that turns conversations into structu
 ```
 
 - 默认会：
-  - 粗略建议标题
+  - 粗略建议标题（已做一版中文指令清洗）
   - 粗略推荐标签
   - 判断是 `create` 还是 `append`
   - 先渲染正式 Markdown

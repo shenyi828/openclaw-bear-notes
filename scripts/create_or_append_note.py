@@ -67,6 +67,7 @@ def main():
     print(f"rendered={rendered.name}")
 
     if args.print_only:
+        print("---")
         print(Path(rendered.name).read_text(encoding="utf-8"))
         return
 
