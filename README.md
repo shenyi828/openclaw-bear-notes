@@ -162,11 +162,18 @@ For major hub notes (学科 / 主义 / 流派), prefer a stronger structure:
 
 Current preferred workflow for major hubs:
 1. rewrite content quality first
-2. improve format and visual hierarchy
+2. improve format and visual hierarchy for Bear reading
 3. add in-body wikilinks carefully
 4. complete the ending `## 关联笔记`
 5. write to Bear first for review
 6. only then sync outward
+
+Bear formatting tips for major hubs:
+- use `> [!summary]` at the top
+- use light highlighting for key judgments
+- keep paragraphs short
+- separate major relations into scan-friendly blocks
+- make the note feel like a hub page, not a plain article
 
 Recommended default workflow after psychology note changes:
 1. inspect the note body carefully
