@@ -152,6 +152,22 @@ Recommended note ending:
 - [[相关笔记B]]：一句说明它提供了什么补充视角
 ```
 
+For major hub notes (学科 / 主义 / 流派), prefer a stronger structure:
+- what this node is
+- why it matters
+- core viewpoint
+- relations to neighboring major hubs
+- what kinds of child notes should live under it
+- how to use it as a hub inside the knowledge base
+
+Current preferred workflow for major hubs:
+1. rewrite content quality first
+2. improve format and visual hierarchy
+3. add in-body wikilinks carefully
+4. complete the ending `## 关联笔记`
+5. write to Bear first for review
+6. only then sync outward
+
 Recommended default workflow after psychology note changes:
 1. inspect the note body carefully
 2. add meaningful in-body wikilinks for existing related notes
