@@ -147,12 +147,18 @@ Recommended note ending:
 ```
 
 Recommended default workflow after psychology note changes:
-1. update note content
-2. write/update in Bear first for user review
-3. update hub/index links if needed
-4. refresh `## 关联笔记`
-5. run one-way sync into Obsidian
-6. refresh local/vector source layers if applicable
+1. inspect the note body carefully
+2. add meaningful in-body wikilinks for existing related notes
+3. refresh the ending `## 关联笔记` block with concrete descriptions
+4. write/update in Bear first for user review
+5. update hub/index links if needed
+6. run one-way sync into Obsidian
+7. refresh local/vector source layers if applicable
+
+Quality bar:
+- do not settle for only end-of-note links
+- do not use vague fallback descriptions in `## 关联笔记`
+- prefer slower, batch-based review over low-quality bulk rewrites
 
 ## Installation
 
