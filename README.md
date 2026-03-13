@@ -37,8 +37,8 @@ A Bear.app note-writing skill for OpenClaw that turns conversations into structu
 代理应优先：
 1. 生成正式 Markdown
 2. 判断标签和模板
-3. 保存本地副本
-4. 写入 Bear
+3. 先写入 Bear，作为用户首要验收面
+4. 再同步本地副本 / Obsidian / 其他检索层
 5. 告知路径与状态
 
 ## 可执行脚本
@@ -148,9 +148,11 @@ Recommended note ending:
 
 Recommended default workflow after psychology note changes:
 1. update note content
-2. update hub/index links if needed
-3. refresh `## 关联笔记`
-4. run one-way sync into Obsidian
+2. write/update in Bear first for user review
+3. update hub/index links if needed
+4. refresh `## 关联笔记`
+5. run one-way sync into Obsidian
+6. refresh local/vector source layers if applicable
 
 ## Installation
 
