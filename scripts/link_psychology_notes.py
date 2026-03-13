@@ -23,6 +23,8 @@ CATEGORY_MAP: Dict[str, List[str]] = {
 }
 
 DESC: Dict[str, str] = {
+    '第三波疗法': '以接纳、正念和价值导向行动为核心的一组现代心理治疗取向。',
+    '激进建构主义与唯理论的对比': '比较主观建构立场与理性先天结构观点在知识来源上的差异。',
     '基础心理学': '心理学的基础层，负责承接感知、记忆、学习、思维、情绪等基本心理机制。',
     '发展心理学': '聚焦个体在不同生命阶段中的变化，并连接依恋、认同、发展任务等主题。',
     '社会心理学': '聚焦个体如何在关系、群体与规范中形成判断、态度与行为。',
@@ -104,6 +106,31 @@ def strip_old_related_block(text: str) -> str:
     return text.rstrip() + '\n'
 
 
+def autolink_text(text: str, title: str, links: List[str]) -> str:
+    protected = {}
+
+    def protect(match):
+        key = f'__PROTECTED_{len(protected)}__'
+        protected[key] = match.group(0)
+        return key
+
+    text = re.sub(r'\[\[[^\]]+\]\]', protect, text)
+    text = re.sub(r'\(bear://[^)]+\)', protect, text)
+
+    for link in sorted(set(links), key=len, reverse=True):
+        if link == title:
+            continue
+        pattern = re.escape(link)
+        text = re.sub(pattern, f'[[{link}]]', text)
+        plain = re.sub(r'（.*?）', '', link)
+        if plain and plain != link and plain != title:
+            text = re.sub(rf'(?<!\[\[){re.escape(plain)}(?!\]\])', f'[[{link}]]', text)
+
+    for key, value in protected.items():
+        text = text.replace(key, value)
+    return text
+
+
 def build_related_block(title: str, links: List[str]) -> str:
     if not links:
         return ''
@@ -117,6 +144,7 @@ def build_related_block(title: str, links: List[str]) -> str:
 def append_related(path: Path, title: str, links: List[str]) -> None:
     text = path.read_text(encoding='utf-8')
     text = strip_old_related_block(text)
+    text = autolink_text(text, title, links)
     text = text.rstrip() + '\n\n' + build_related_block(title, links)
     path.write_text(text, encoding='utf-8')
 
