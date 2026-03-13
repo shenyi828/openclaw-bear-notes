@@ -119,6 +119,15 @@ Current behavior:
 - falls back to Bear-exported psychology notes from `vector-test/data/bear/psychology/`
 - keeps sync one-way into Obsidian
 - writes files as Markdown compatible with Obsidian wikilinks
+- can be paired with `autofill_psychology_index.py` to reduce missing index entries
+
+### Related maintenance scripts
+
+```bash
+./scripts/autofill_psychology_index.py
+./scripts/enrich_psychology_index_descriptions.py
+./scripts/clean_obsidian_to_psychology_only.sh
+```
 
 ## Installation
 
