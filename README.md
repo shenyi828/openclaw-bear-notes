@@ -126,8 +126,31 @@ Current behavior:
 ```bash
 ./scripts/autofill_psychology_index.py
 ./scripts/enrich_psychology_index_descriptions.py
+./scripts/link_psychology_notes.py
 ./scripts/clean_obsidian_to_psychology_only.sh
 ```
+
+### Psychology note structure
+
+Recommended hierarchy:
+- `心理学目录` = level 1 index
+- stable domain/school/hub notes (学科 / 主义 / 流派) = level 2 hubs
+- specific concepts / experiments / mechanisms / cases = child notes mounted under one or more hubs
+
+Recommended note ending:
+
+```md
+## 关联笔记
+
+- [[相关笔记A]]：一句说明它为什么和本篇相关
+- [[相关笔记B]]：一句说明它提供了什么补充视角
+```
+
+Recommended default workflow after psychology note changes:
+1. update note content
+2. update hub/index links if needed
+3. refresh `## 关联笔记`
+4. run one-way sync into Obsidian
 
 ## Installation
 

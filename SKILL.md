@@ -133,6 +133,9 @@ Bear 中的正式笔记应具备：
 - 已提供主入口脚本 `create_or_append_note.py`，可串联标题建议、标签推荐、动作判断、Markdown 渲染与 Bear 写入
 - 已提供 `sync_psychology_to_obsidian.py`，支持心理学笔记从 Bear/本地正式稿单向同步到 Obsidian vault
 - 已提供 `autofill_psychology_index.py` 与 `enrich_psychology_index_descriptions.py`，用于目录缺项补全与简介增强
+- 已提供 `link_psychology_notes.py`，用于给稳定枢纽笔记挂载子笔记，并在笔记末尾统一生成“关联笔记”区块
+- 心理学知识库采用层级结构：`心理学目录` 为一级目录；学科 / 主义 / 流派等稳定枢纽笔记为二级；新增概念、案例、实验、机制等多归为子笔记并挂载到对应枢纽之下
+- 心理学笔记正文末尾默认保留统一格式的 `## 关联笔记` 区块，列出本篇相关双链及一句简介
 - 当维护“目录型笔记”（如《心理学目录》）时，应把新增正式笔记及增强稿纳入目录更新检查，避免只写新笔记、不回填目录
 - 自动检索相似旧笔记，决定新建/追加
 - 根据 Bear 既有标签树自动推荐标签
