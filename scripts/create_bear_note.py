@@ -1,14 +1,13 @@
 #!/usr/bin/env python3
 import argparse
-import json
 import subprocess
+import urllib.parse
 from pathlib import Path
 from typing import List, Optional
 
 
 def normalize_tag(tag: str) -> str:
-    tag = tag.strip().lstrip("#")
-    return tag
+    return tag.strip().lstrip("#")
 
 
 def read_note(file_path: Optional[str], body: Optional[str]) -> str:
@@ -17,24 +16,44 @@ def read_note(file_path: Optional[str], body: Optional[str]) -> str:
     return body or ""
 
 
-def escape_js(s: str) -> str:
-    return json.dumps(s)
+def strip_leading_h1_and_tags(title: str, note: str, tags: List[str]) -> str:
+    lines = note.splitlines()
+    tag_set = {f'#{normalize_tag(t)}' for t in tags if t.strip()}
+
+    i = 0
+    while i < len(lines) and not lines[i].strip():
+        i += 1
+    if i < len(lines):
+        first = lines[i].strip()
+        if first.lstrip('#').strip() == title.strip():
+            lines = lines[:i] + lines[i+1:]
+
+    cleaned = []
+    for line in lines:
+        if line.strip() in tag_set:
+            continue
+        cleaned.append(line)
+
+    while cleaned and not cleaned[0].strip():
+        cleaned = cleaned[1:]
+    return '\n'.join(cleaned).strip()
 
 
-def build_bear_url(title: str, note: str, tags: List[str]) -> str:
-    title_js = escape_js(title)
-    note_js = escape_js(note)
+def encode_part(text: str) -> str:
+    return urllib.parse.quote(text, safe="")
+
+
+def build_url(title: str, note: str, tags: List[str]) -> str:
     tag_list = [normalize_tag(t) for t in tags if t.strip()]
-    tags_js = escape_js(",".join(tag_list))
-    script = f'''set theTitle to {title_js}
-set theNote to {note_js}
-set theTags to {tags_js}
-set encodedTitle to do shell script "python3 - <<'PY'\nimport urllib.parse,sys\nprint(urllib.parse.quote(sys.stdin.read(), safe=''))\nPY" input theTitle
-set encodedNote to do shell script "python3 - <<'PY'\nimport urllib.parse,sys\nprint(urllib.parse.quote(sys.stdin.read(), safe=''))\nPY" input theNote
-set encodedTags to do shell script "python3 - <<'PY'\nimport urllib.parse,sys\nprint(urllib.parse.quote(sys.stdin.read(), safe=''))\nPY" input theTags
-set theURL to "bear://x-callback-url/create?title=" & encodedTitle & "&text=" & encodedNote & "&tags=" & encodedTags
-open location theURL'''
-    return script
+    clean_note = strip_leading_h1_and_tags(title, note, tags)
+    return (
+        "bear://x-callback-url/create?title="
+        + encode_part(title)
+        + "&text="
+        + encode_part(clean_note)
+        + "&tags="
+        + encode_part(",".join(tag_list))
+    )
 
 
 def main():
@@ -46,8 +65,8 @@ def main():
     args = ap.parse_args()
 
     note = read_note(args.file, args.body)
-    script = build_bear_url(args.title, note, args.tag)
-    subprocess.run(["osascript", "-e", script], check=True)
+    url = build_url(args.title, note, args.tag)
+    subprocess.run(["open", url], check=True)
     print("OK")
 
 if __name__ == "__main__":
