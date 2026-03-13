@@ -17,8 +17,10 @@ def normalize_tag(tag: str) -> str:
     return tag if tag.startswith("#") else f"#{tag}"
 
 
-def strip_duplicate_h1(title: str, body: str) -> str:
+def strip_duplicate_h1_and_tags(title: str, body: str, tags: List[str]) -> str:
     lines = body.splitlines()
+    clean_tag_set = {normalize_tag(t) for t in tags if t.strip()}
+
     i = 0
     while i < len(lines) and not lines[i].strip():
         i += 1
@@ -26,9 +28,17 @@ def strip_duplicate_h1(title: str, body: str) -> str:
         first = lines[i].strip().lstrip('#').strip()
         if first == title.strip():
             lines = lines[:i] + lines[i+1:]
-            while lines and not lines[0].strip():
-                lines = lines[1:]
-    return "\n".join(lines).strip()
+
+    cleaned = []
+    for line in lines:
+        s = line.strip()
+        if s in clean_tag_set:
+            continue
+        cleaned.append(line)
+
+    while cleaned and not cleaned[0].strip():
+        cleaned = cleaned[1:]
+    return "\n".join(cleaned).strip()
 
 
 def build_content(title: str, tags: List[str], body: str, template: Optional[str]) -> str:
@@ -38,7 +48,7 @@ def build_content(title: str, tags: List[str], body: str, template: Optional[str
         lines.extend(clean_tags)
         lines.append("")
     if body.strip():
-        cleaned_body = strip_duplicate_h1(title, body)
+        cleaned_body = strip_duplicate_h1_and_tags(title, body, tags)
         lines.append(cleaned_body)
     elif template and template in TEMPLATES:
         for section in TEMPLATES[template]:
