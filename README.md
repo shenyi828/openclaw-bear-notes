@@ -137,6 +137,12 @@ Recommended hierarchy:
 - stable domain/school/hub notes (学科 / 主义 / 流派) = level 2 hubs
 - specific concepts / experiments / mechanisms / cases = child notes mounted under one or more hubs
 
+Recommended sequencing when the graph is still sparse:
+1. strengthen major hubs first (学科 / 主义 / 流派)
+2. connect major hubs laterally
+3. make hub endings consistent
+4. only then expand child-note mounting
+
 Recommended note ending:
 
 ```md
